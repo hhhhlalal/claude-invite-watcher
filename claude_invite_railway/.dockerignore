@@ -1,0 +1,12 @@
+.git
+.venv
+__pycache__
+*.db*
+*.log
+.env*
+X_STORAGE_STATE_B64.txt
+browser_profile
+results.html
+session-state.json
+session-seed.sha256
+data

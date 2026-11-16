@@ -1,0 +1,25 @@
+name: Tests and Docker browser smoke
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r claude_invite_railway/requirements.txt
+      - run: python -m compileall -q claude_invite_railway
+      - run: python -m unittest discover -s claude_invite_railway -v
+  docker-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t invite-watcher-test .
+      - name: Test real Chromium, HTTP server and ntfy against local fixtures
+        run: docker run --rm --init --network none -e RUN_BROWSER_TESTS=1 invite-watcher-test python -m unittest discover -s /app -v

@@ -1,0 +1,8 @@
+{
+  "interval_seconds": 300,
+  "max_age_hours": 24,
+  "scroll_pages": 3,
+  "queries": ["\"claude.ai/duet-invite\" -filter:retweets", "Claude (\"7 days\" OR \"7-day\" OR \"7 ngày\") (invite OR trial OR free OR referral) -filter:retweets"],
+  "ntfy_topic": "",
+  "ntfy_server": "https://ntfy.sh"
+}
